@@ -1,0 +1,68 @@
+:root {
+      --primary-color : #110E36;
+      --secondary-color : #1B273C;
+      --accent-color : #0EA6E6;
+      --window-size : 1350px;
+}
+
+#id {
+      /* background-color: var(--primary-color); */
+      height: 100vh;
+}
+
+.window-size {
+      width: 100%;
+      max-width: var(--window-size);
+      margin: 0 auto;
+      padding: 0 1rem;
+}
+
+header {
+      height: max-content;
+      /* background: linear-gradient(180deg, rgba(17,14,54,1) 10%, rgba(17,14,54,0.5) 100%), url("https://images.unsplash.com/photo-1680950781367-fe720fae1e4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"); */
+      background-color: rgba(17, 14, 54, 0.8);
+      background-blend-mode: multiply;
+      background-size: cover;
+      background-position: center
+}
+
+footer {
+      background: url("https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+      background-color: rgba(17, 14, 54, 0.8);
+      background-blend-mode: multiply;
+      background-size: cover;
+      background-position: center
+}
+
+.bottom-overlay {
+      z-index: 1;
+      background: linear-gradient(0deg, rgba(17,14,54,1) 5%, rgba(17,14,54,0) 100%);
+}
+
+.top-overlay {
+      background: linear-gradient(180deg, rgba(17,14,54,1) 20%, rgba(17,14,54,0) 100%);
+}
+
+main {
+      min-height: 100vh;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+      .btn-primary {
+            @apply bg-main-accent px-6 py-3 rounded-3xl text-sm font-semibold ease-in-out duration-500  border-main-accent border-2 hover:bg-transparent;
+      }
+
+      .btn-secondary {
+            @apply bg-transparent px-6 py-3 rounded-3xl text-sm font-semibold ease-in-out duration-500  border-white border-2 hover:bg-white hover:text-main-primary;
+      }
+
+      .btn-small {
+            @apply bg-transparent px-4 py-1 rounded-3xl text-xs font-semibold ease-in-out duration-500  border-white border-2 hover:bg-white hover:text-main-primary;
+      }
+}
