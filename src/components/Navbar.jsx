@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Logo from "../assets/logo-white.png"
 import {HiSearch, HiMenuAlt1, HiUserCircle, HiOutlineX, HiX} from "react-icons/hi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const navigations = [
       {
            title: "Home",
@@ -64,11 +64,24 @@ const Navbar = () => {
       const [accMenu, setAccMenu] = useState(false);
       const [loggedIn, setLoggedIn] = useState(false);
       const [searchMenu, setSearchMenu] = useState(false);
+      const navigate = useNavigate();
 
       {
             searchMenu ? 
             document.getElementsByTagName("body")[0].style.overflow = "hidden" : 
             document.getElementsByTagName("body")[0].style.overflow = "auto"
+      }
+
+      useEffect(() => {
+            if (sessionStorage.getItem("username") != null) {
+                  setLoggedIn(true);
+
+            }
+      }, [])
+
+      const logout = () => {
+            sessionStorage.clear();
+            navigate("/login");
       }
 
       return (
@@ -98,21 +111,20 @@ const Navbar = () => {
                                     <HiSearch onClick={() => setSearchMenu(!searchMenu)} className=" text-2xl cursor-pointer"/>
                                     <div className="profile-icon relative">
                                           <div className=" w-10 h-10 rounded-full overflow-hidden cursor-pointer border-4 border-main-secondary" onClick={() => setAccMenu(!accMenu)}>
-                                                <img className="w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1330&q=80" alt="" />
+                                                <img className="w-full h-full object-cover object-center" src={sessionStorage.getItem("profile") ? sessionStorage.getItem("profile") : "https://st.depositphotos.com/1898481/5087/i/450/depositphotos_50878063-stock-photo-people.jpg"} alt="" />
                                           </div>
                                           {
                                                 accMenu && <ul className=" w-44 space-y-3 rounded-lg absolute top-full right-0 bg-main-primary border-2 border-main-secondary py-4 px-5 mt-2">
                                                 {
                                                       loggedIn ? <>
-                                                            <h2 className="text-md border-b-2 border-main-secondary pb-2  font-semibold">Yashwanth M Y</h2>
-                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Account Setting</li>
-                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Favourite</li>
-                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Whishlist</li>
-                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Logout</li>
+                                                            <h2 className="text-md border-b-2 border-main-secondary pb-2  font-semibold">{sessionStorage.getItem("username")}</h2>
+                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300"><Link to="/settings">Account Settings</Link></li>
+                                                            <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300"><Link to="/favourite">Favourite</Link></li>
+                                                            <li onClick={logout} className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Logout</li>
                                                       </> : <>
                                                       <li className="text-md border-b-2 border-main-secondary pb-2  font-semibold">Account</li>
-                                                      <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Login</li>
-                                                      <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300">Register</li></>
+                                                      <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300"><Link to="/login">Login</Link></li>
+                                                      <li className="text-sm border-main-secondary pb-2 cursor-pointer text-gray-400 font-semibold hover:text-main-accent ease-in-out duration-300"><Link to="/register">Register</Link></li></>
                                                 }
                                           </ul>
                                           }

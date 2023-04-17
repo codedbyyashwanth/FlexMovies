@@ -47,7 +47,7 @@ export const HeroSection = ({setBgUrl}) => {
                                         <p className="font-semibold">{data[index].description}</p>
                                         <div className="space-x-5 relative py-4 sm:flex sm:flex-col sm:space-x-0 sm:space-y-5 sm:text-center" style={{zIndex : 30}}>
                                                 <a className="btn-primary inline-flex items-center" href="#"><HiFilm className="mr-2 text-lg" /> Watch Trailer</a>
-                                                <a className="btn-secondary inline-flex items-center" href="#"><HiBookmark className="mr-2 text-lg" /> Watch Trailer</a>
+                                                <a className="btn-secondary inline-flex items-center" href="#"><HiBookmark className="mr-2 text-lg" />Movie Details</a>
                                         </div>
                                 </div>
                                 <div className="movie-img w-64 rounded-xl overflow-hidden">

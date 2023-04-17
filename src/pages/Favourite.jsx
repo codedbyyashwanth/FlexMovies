@@ -2,18 +2,16 @@ import Navbar from "../components/Navbar";
 import Overlay from "../components/Bgoverlay";
 import { HeroSection } from "../components/movies/HeroSection";
 import {Card} from "../components/Card";
-import { data } from "../utils/actors";
+import { data } from "../utils/movie";
 import {Footer} from "../components/Footer";
 import { HiFilter } from "react-icons/hi";
 import { useState } from "react";
-import { ActorsCard } from "../components/ActorsCard";
 
 const url = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
 
-const Actors = () => {
+const Favourite = () => {
         const [filterMenu, setFilterMenu] = useState(false);
         const [filterMsg, setFilterMsg] = useState("All (A-Z)");
-
 
         return (
                 <>
@@ -21,11 +19,11 @@ const Actors = () => {
                                 <Overlay name="top-overlay" top="top-0" />
                                 <Navbar />
                                 <Overlay name="bottom-overlay" top="top-3/4" />
-                                <HeroSection title="Actors" />
+                                <HeroSection title="Favourite" />
                         </header>
                         <main className="py-6">
                                 <div className="filter-section window-size">
-                                        <div className="filter-option flex justify-end" style={{zIndex : -1}}>
+                                        <div className="filter-option flex justify-end">
                                                 <div onClick={() => setFilterMenu(!filterMenu)} className="relative py-2 px-6 rounded-lg border-2 border-main-secondary flex items-center space-x-2 max-w-fit cursor-pointer">
                                                         <HiFilter  className="text-sm text-gray-400" />
                                                         <span className="text-sm text-gray-400">Filter result by: </span> <span className="text-sm text-gray-400 font-semibold">{filterMsg}</span>
@@ -42,7 +40,7 @@ const Actors = () => {
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
                                                 data.map((items, index) => (
-                                                        <ActorsCard data={items} key={index} ></ActorsCard>
+                                                        <Card data={items} key={index} ></Card>
                                                 ))
                                         }
                                 </div>
@@ -55,4 +53,4 @@ const Actors = () => {
         );
 }
 
-export default Actors
+export default Favourite
