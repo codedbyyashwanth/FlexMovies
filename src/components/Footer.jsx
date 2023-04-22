@@ -31,12 +31,12 @@ export const Footer = () => {
                                         </ul>    
                                 </div>
                                 <div className="legal-contaainer space-y-3 m-2">
-                                        <h3 className="text-md font-semibold text-main-accent">Other Links</h3>
+                                        <h3 className="text-md font-semibold text-main-accent">Popular Genre</h3>
                                         <ul className=" space-y-3">
-                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">FAQ</li>
-                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">About</li>
-                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Privacy Policy</li>
-                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Terms & Condition</li>
+                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Action</li>
+                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Thriller</li>
+                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Sports</li>
+                                                <li className=" hover:text-main-accent ease-in-out duration-300 cursor-pointer text-sm font-semibold">Drama</li>
                                         </ul>
                                 </div>
                                 <div className="legal-contaainer space-y-3 m-2">

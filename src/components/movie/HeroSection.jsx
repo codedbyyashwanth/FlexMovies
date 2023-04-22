@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {data} from "../../utils/data";
+import {data} from "../../utils/shows/data";
 import { HiFilm, HiHeart } from "react-icons/hi";
 
 export const HeroSection = () => {

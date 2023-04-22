@@ -1,8 +1,9 @@
 import { Card } from "./Card";
-import { data } from "../utils/data";
+// import { data } from "../utils/data";
 import { HiChevronRight } from "react-icons/hi";
 
-export const CardSection = ({sectionTitle}) => {
+export const CardSection = ({sectionTitle, data}) => {
+
         return (
                 <section className="movie-card-section window-size mb-10">
                         <div className="heading-container flex justify-between items-center">
@@ -11,7 +12,7 @@ export const CardSection = ({sectionTitle}) => {
                         </div>
                         <div className="container grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                 {
-                                        data.map((items, index) => (
+                                        data.results.slice(0, 6).map((items, index) => (
                                                 <Card data={items} key={index} ></Card>
                                         ))
                                 }

@@ -2,10 +2,12 @@ import Navbar from "../components/Navbar";
 import Overlay from "../components/Bgoverlay";
 import { HeroSection } from "../components/movies/HeroSection";
 import {Card} from "../components/Card";
-import { data } from "../utils/movie";
+import { data as movieData } from "../utils/movie";
 import {Footer} from "../components/Footer";
 import { HiFilter } from "react-icons/hi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MoviesContext, getMedia } from "../utils/data";
+import { useQuery } from "react-query";
 
 const url = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
 
@@ -13,8 +15,24 @@ const Movies = () => {
         const [filterMenu, setFilterMenu] = useState(false);
         const [filterMsg, setFilterMsg] = useState("All (A-Z)");
 
+        const loadData = async () => {
+                const latestMovies = await getMedia("latest");
+                const popularMovies = await getMedia("popular");
+                const ratedMovies = await getMedia("top_rated");
+                const upcomingMovies = await getMedia("upcoming");
+
+                return {"latest": latestMovies, "popular": popularMovies, "rated": ratedMovies, "upcoming": upcomingMovies};
+        }
+
+        const {data, status} = useQuery("dd", loadData);
+
+        if (status == "loading") {
+                return <h1>Loading</h1>
+        }
+                
+
         return (
-                <>
+                <MoviesContext.Provider value={{"datas" : data}}>
                         <header className={`relative h-[60vh] sm:h-[50vh] bg-[url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80')]`}>
                                 <Overlay name="top-overlay" top="top-0" />
                                 <Navbar />
@@ -39,7 +57,7 @@ const Movies = () => {
                                 </div>
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
-                                                data.map((items, index) => (
+                                                movieData.map((items, index) => (
                                                         <Card data={items} key={index} ></Card>
                                                 ))
                                         }
@@ -49,7 +67,7 @@ const Movies = () => {
                                 </div>
                         </main>
                         <Footer />
-                </>
+                </MoviesContext.Provider>
         );
 }
 
