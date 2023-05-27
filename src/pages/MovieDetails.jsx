@@ -4,20 +4,39 @@ import { useState } from "react";
 import { CardSection } from "../components/CardSection";
 import { Footer } from "../components/Footer";
 import { HeroSection } from "../components/movie/HeroSection";
-import { data } from "../utils/actors";
+import { data as datas } from "../utils/actors";
 import { ActorsCard } from "../components/ActorsCard";
+import { useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getRelated, getDetails, getInfo } from "../utils/data";
 
 
 export const MovieDetails = () => {
         const [bgUrl, setBgUrl] = useState("https://www.themoviedb.org/t/p/w533_and_h300_bestv2/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg");
-        
+        const {id} = useParams();
+
+        const fetchMovies = async () => {
+                const movieData = await getDetails(id);
+                const movies = await getRelated("movie", id);
+                const info = await getInfo("movie", id);
+                return {"movieData": movieData, "movies":movies, "info": info};
+        }
+
+        const {data, status} = useQuery(`movie${id}`, fetchMovies);
+
+        if (status == "loading")
+                return <h1>Loading....</h1>
+
+        if (status == "error")
+                return <h1>Error...</h1>
+
         return (
                 <>
-                        <header className="relative min-h-screen" style={{ backgroundImage : `url(${bgUrl})` }}>
+                        <header className="relative min-h-screen" style={{ backgroundImage : `url(https://www.themoviedb.org/t/p/w533_and_h300_bestv2${data.movieData.backdrop_path})` }}>
                                 <Overlay name="top-overlay" top="top-0" />
                                 <Navbar />
                                 <Overlay name="bottom-overlay" top="top-3/4" />
-                                <HeroSection />
+                                <HeroSection posterUrl={data.movieData.poster_path} genres={data.movieData.genres} title={data.movieData.original_title} />
                         </header>
                         <main className="py-6">
                                 <div className="heading-container flex justify-between items-center window-size">
@@ -25,7 +44,9 @@ export const MovieDetails = () => {
                                 </div>
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
-                                                data.slice(0,6).map((items, index) => (
+                                                data.info.cast.length > 6 ? data.info.cast.slice(0,6).map((items, index) => (
+                                                        <ActorsCard data={items} key={index} ></ActorsCard>
+                                                )) : data.info.cast.map((items, index) => (
                                                         <ActorsCard data={items} key={index} ></ActorsCard>
                                                 ))
                                         }
@@ -35,11 +56,11 @@ export const MovieDetails = () => {
                                                 <h3 className=" text-lg font-semibold">Watch Trailer</h3>
                                         </div>
                                         <div className="container my-4">
-                                                <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/TnGl01FkMMo" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                                                <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/vBwj0QpKbSM" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                                         </div>
                                 </section>
                                 <section>
-                                        {/* <CardSection sectionTitle="Related" data={data} /> */}
+                                        <CardSection sectionTitle="Related" data={data.movies} />
                                 </section>
                         </main>
                         <Footer />

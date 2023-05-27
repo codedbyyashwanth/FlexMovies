@@ -7,12 +7,29 @@ import {Footer} from "../components/Footer";
 import { HiFilter } from "react-icons/hi";
 import { useState } from "react";
 import { ActorsCard } from "../components/ActorsCard";
+import { useQuery } from "react-query";
+import Pagination from "../components/Paginaion";
+import { getActors } from "../utils/data";
 
 const url = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
 
 const Actors = () => {
         const [filterMenu, setFilterMenu] = useState(false);
         const [filterMsg, setFilterMsg] = useState("All (A-Z)");
+        const [page, setPage] = useState(1);
+
+        const fetchActors = async () => {
+                const movieData = await getActors("popular", page);
+                return movieData;
+        }
+
+        const {data, status} = useQuery(`all-tv-series${page}`, fetchActors);
+
+        if (status == "loading")
+                return <h1>Loading....</h1>
+
+        if (status == "error")
+                return <h1>Error...</h1>
 
 
         return (
@@ -24,7 +41,7 @@ const Actors = () => {
                                 <HeroSection title="Actors" />
                         </header>
                         <main className="py-6">
-                                <div className="filter-section window-size">
+                                {/* <div className="filter-section window-size">
                                         <div className="filter-option flex justify-end" style={{zIndex : -1}}>
                                                 <div onClick={() => setFilterMenu(!filterMenu)} className="relative py-2 px-6 rounded-lg border-2 border-main-secondary flex items-center space-x-2 max-w-fit cursor-pointer">
                                                         <HiFilter  className="text-sm text-gray-400" />
@@ -38,16 +55,16 @@ const Actors = () => {
                                                         }
                                                 </div>
                                         </div>
-                                </div>
+                                </div> */}
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
-                                                data.map((items, index) => (
+                                                data.results.map((items, index) => (
                                                         <ActorsCard data={items} key={index} ></ActorsCard>
                                                 ))
                                         }
                                 </div>
                                 <div className="load-more-btn text-center my-6">
-                                        <button className="btn-primary">Load More</button>
+                                        <Pagination page={page} setPage={setPage} totalPages={data.total_pages} />
                                 </div>
                         </main>
                         <Footer />

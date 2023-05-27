@@ -21,7 +21,7 @@ const Movies = () => {
         const [page, setPage] = useState(1);
 
         const fetchMovies = async () => {
-                const movieData = await getNextPage("popular", "movie",page, filter);
+                const movieData = await getNextPage("popular", "movie",page);
                 return movieData;
         }
 
@@ -38,6 +38,8 @@ const Movies = () => {
                 setFilter(value);
                 setFilterMsg(e.target.textContent);
         }
+
+
         
         return (
                 <>
@@ -68,7 +70,7 @@ const Movies = () => {
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
                                                 data.results.map((items, index) => (
-                                                        <Card data={items} key={index}></Card>
+                                                        <Card data={items} key={index} ></Card>
                                                 ))
                                         }
                                 </div>
