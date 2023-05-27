@@ -35,11 +35,11 @@ export const MovieDetails = () => {
                                                 <h3 className=" text-lg font-semibold">Watch Trailer</h3>
                                         </div>
                                         <div className="container my-4">
-                                                <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/TnGl01FkMMo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/TnGl01FkMMo" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                                         </div>
                                 </section>
                                 <section>
-                                        <CardSection sectionTitle="Related" />
+                                        {/* <CardSection sectionTitle="Related" data={data} /> */}
                                 </section>
                         </main>
                         <Footer />
