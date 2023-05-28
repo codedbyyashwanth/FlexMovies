@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Settings from "./pages/Settings";
 import Favourite from "./pages/Favourite";
+import { TVShow } from "./pages/TVShow";
 
 const App = () => {
       return (
@@ -16,8 +17,9 @@ const App = () => {
                   <Route path="/" element={<Home />} />
                   <Route path="/movies" element={<Movies />} />
                   <Route path="/tv-shows" element={<TVShows />} />
+                  <Route path="/tv-show/:id" element={<TVShow />} />
                   <Route path="/actors" element={<Actors />} />
-                  <Route path="/actor" element={<Actor />} />
+                  <Route path="/actor/:id" element={<Actor />} />
                   <Route path="/movie/:id" element={<MovieDetails />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

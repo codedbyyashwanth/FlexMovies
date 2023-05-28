@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 // import {data} from "../../utils/data";
 import { HiBookmark, HiFilm } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+
+
 
 export const HeroSection = ({setBgUrl, data}) => {
         const [index, setIndex] = useState(0);
+        const navigate = useNavigate();
         var count=0;
         var timeout;
 
@@ -31,7 +35,17 @@ export const HeroSection = ({setBgUrl, data}) => {
                         clearInterval(timeout);
         }, 5000);
 
-        timeout
+        timeout;
+
+        const handle = (e) => {
+                e.preventDefault();
+                navigate(`/movie/${data[index].id}`)
+        }
+
+        const handleWatch = (e) => {
+                e.preventDefault();
+                navigate(`/movie/${data[index].id}`)
+        }
         
         return (
                 <section className="hero-section h-[80vh] md:h-max md:py-20 md:px-6 md:pb-24" >
@@ -47,8 +61,8 @@ export const HeroSection = ({setBgUrl, data}) => {
                                         </div>
                                         <p className="font-semibold">{data[index].overview}</p>
                                         <div className="space-x-5 relative py-4 sm:flex sm:flex-col sm:space-x-0 sm:space-y-5 sm:text-center" style={{zIndex : 30}}>
-                                                <a className="btn-primary inline-flex items-center justify-center" href="#"><HiFilm className="mr-2 text-lg" />Watch Trailer</a>
-                                                <a className="btn-secondary inline-flex items-center justify-center" href="#"><HiBookmark className="mr-2 text-lg" />Movie Details</a>
+                                                <a className="btn-primary inline-flex items-center justify-center cursor-pointer" onClick={(e) => handleWatch(e)}><HiFilm className="mr-2 text-lg" />Watch Trailer</a>
+                                                <a className="btn-secondary inline-flex items-center justify-center cursor-pointer" onClick={(e) => handle(e)}><HiBookmark className="mr-2 text-lg" />Movie Details</a>
                                         </div>
                                 </div>
                                 <div className="movie-img w-64 rounded-xl overflow-hidden">

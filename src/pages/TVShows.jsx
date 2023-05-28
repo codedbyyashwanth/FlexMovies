@@ -9,6 +9,7 @@ import {Footer} from "../components/Footer";
 import { HiFilter } from "react-icons/hi";
 import { useState } from "react";
 import { getNextPage } from "../utils/data";
+import Loading from "../components/Loading";
 
 const url = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80";
 
@@ -25,7 +26,7 @@ const TVShows = () => {
         const {data, status} = useQuery(`all-tv-series${page}`, fetchMovies);
 
         if (status == "loading")
-                return <h1>Loading....</h1>
+                return <Loading />
 
         if (status == "error")
                 return <h1>Error...</h1>
@@ -57,7 +58,7 @@ const TVShows = () => {
                                 <div className="container window-size grid grid-cols-6 gap-4 my-6 md:grid-cols-3 sm:grid-cols-2">
                                         {
                                                 data.results.map((items, index) => (
-                                                        <Card data={items} key={index} ></Card>
+                                                        <Card data={items} key={index} media="tv-show"></Card>
                                                 ))
                                         }
                                 </div>

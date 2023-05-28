@@ -86,9 +86,9 @@ const Navbar = () => {
 
       return (
             <nav className="z-10">
-                  {
+                  {/* {
                         searchMenu && <SearchContainer setSearchMenu={setSearchMenu} />
-                  }
+                  } */}
                   <div className="container window-size flex justify-between items-center py-1 sm:px-3 relative">
                         <div className="logo-container w-36 sm:w-32">
                               <img className="w-full" src={Logo} alt="Logo" />
@@ -108,7 +108,7 @@ const Navbar = () => {
                         </div>
                         <div className="profile-items">
                               <div className="container flex items-center space-x-3">
-                                    <HiSearch onClick={() => setSearchMenu(!searchMenu)} className=" text-2xl cursor-pointer"/>
+                                    {/* <HiSearch onClick={() => setSearchMenu(!searchMenu)} className=" text-2xl cursor-pointer"/> */}
                                     <div className="profile-icon relative">
                                           <div className=" w-10 h-10 rounded-full overflow-hidden cursor-pointer border-4 border-main-secondary" onClick={() => setAccMenu(!accMenu)}>
                                                 <img className="w-full h-full object-cover object-center" src={sessionStorage.getItem("profile") ? sessionStorage.getItem("profile") : "https://st.depositphotos.com/1898481/5087/i/450/depositphotos_50878063-stock-photo-people.jpg"} alt="" />

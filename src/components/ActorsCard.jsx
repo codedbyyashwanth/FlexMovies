@@ -1,8 +1,15 @@
 import {HiBriefcase, HiStar} from "react-icons/hi"
+import { useNavigate } from "react-router-dom"
 
 export const ActorsCard = ({data}) => {
+        const navigate = useNavigate();
+
+        const gotoActors = () => {
+                navigate(`/actor/${data.id}`);
+        }
+
         return (
-                <div className="card">
+                <div className="card" onClick={gotoActors}>
                         <div className="img-container rounded-xl overflow-hidden cursor-pointer">
                                 <img  className="hover:scale-105 ease-in-out duration-500" src={data.profile_path !== null ? `https://image.tmdb.org/t/p/w500${data.profile_path}` : "https://cdn.pixabay.com/photo/2015/03/24/00/46/food-686922_1280.jpg"} alt="" />
                         </div>

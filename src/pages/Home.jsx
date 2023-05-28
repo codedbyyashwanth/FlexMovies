@@ -6,6 +6,7 @@ import { CardSection } from "../components/CardSection";
 import { Footer } from "../components/Footer";
 import { useQuery } from "react-query";
 import {MoviesContext, getMedia} from "../utils/data";
+import Loading from "../components/Loading";
 
 
 const url = `https://images.unsplash.com/photo-1680950781367-fe720fae1e4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80`;
@@ -27,7 +28,7 @@ export const Home = () => {
         const {data, status} = useQuery("movies", loadData);
 
         if (status == "loading") {
-                return <h1>Loading</h1>
+                return <Loading />
         }
         
         return (
@@ -39,10 +40,10 @@ export const Home = () => {
                                 <HeroSection setBgUrl={setBgUrl} data={data.latest.results.slice(6,13)} />
                         </header>
                         <main className="py-6">
-                                <CardSection data={data.popular} sectionTitle="Popular Movies" />
-                                <CardSection data={data.upcoming} sectionTitle="Upcoming Movies" />
-                                <CardSection data={data.popularTV} sectionTitle="TV Shows" />
-                                <CardSection data={data.rated} sectionTitle="Top-Rated Movies" />
+                                <CardSection data={data.popular} sectionTitle="Popular Movies" media="movies" />
+                                <CardSection data={data.upcoming} sectionTitle="Upcoming Movies" media="movies" />
+                                <CardSection data={data.popularTV} sectionTitle="TV Shows" media="tv-shows" url="tv-show" />
+                                <CardSection data={data.rated} sectionTitle="Top-Rated Movies" media="movies" />
                         </main>
                         <Footer />
                 </>

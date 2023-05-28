@@ -12,19 +12,19 @@ import { getRelated, getDetails, getInfo, getVideo } from "../utils/data";
 import Loading from "../components/Loading";
 
 
-export const MovieDetails = () => {
+export const TVShow = () => {
         const [bgUrl, setBgUrl] = useState("https://www.themoviedb.org/t/p/w533_and_h300_bestv2/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg");
         const {id} = useParams();
 
         const fetchMovies = async () => {
-                const movieData = await getDetails("movie",id);
-                const movies = await getRelated("movie", id);
-                const info = await getInfo("movie", id);
-                const video = await getVideo("movie", id);
+                const movieData = await getDetails("tv",id);
+                const movies = await getRelated("tv", id);
+                const info = await getInfo("tv", id);
+                const video = await getVideo("tv", id);
                 return {"movieData": movieData, "movies":movies, "info": info, "video": video};
         }
 
-        const {data, status} = useQuery(`movie${id}`, fetchMovies);
+        const {data, status} = useQuery(`tv${id}`, fetchMovies);
 
         if (status == "loading")
                 return <Loading />
@@ -38,7 +38,7 @@ export const MovieDetails = () => {
                                 <Overlay name="top-overlay" top="top-0" />
                                 <Navbar />
                                 <Overlay name="bottom-overlay" top="top-3/4" />
-                                <HeroSection posterUrl={data.movieData.poster_path} genres={data.movieData.genres} title={data.movieData.original_title} />
+                                <HeroSection posterUrl={data.movieData.poster_path} genres={data.movieData.genres} title={data.movieData.name} />
                         </header>
                         <main className="py-6">
                                 <div className="heading-container flex justify-between items-center window-size">
@@ -65,7 +65,7 @@ export const MovieDetails = () => {
                                 }
                                 
                                 <section>
-                                        <CardSection sectionTitle="Related" data={data.movies} media="movies" />
+                                        <CardSection sectionTitle="Related" data={data.movies} url="tv-show" />
                                 </section>
                         </main>
                         <Footer />

@@ -2,11 +2,11 @@ import {HiStar} from "react-icons/hi"
 import { useNavigate } from "react-router-dom"
 
 
-export const Card = ({data}) => {
+export const Card = ({data, media}) => {
         const navigate = useNavigate();
 
         const gotoMovie = () => {
-                navigate(`/movie/${data.id}`);
+                navigate(`/${media ? media : "movie"}/${data.id}`);
         }
 
         return (
